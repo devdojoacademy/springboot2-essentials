@@ -18,6 +18,8 @@ public class AnimeService {
         return animeRepository.findAll();
     }
 
+    public List<Anime> findByName(String name){return animeRepository.findByName(name);}
+
     public Anime findById(int id) {
         return utils.findAnimeOrThrowNotFound(id, animeRepository);
     }
