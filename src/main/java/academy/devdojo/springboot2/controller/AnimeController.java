@@ -1,9 +1,7 @@
 package academy.devdojo.springboot2.controller;
 
 import academy.devdojo.springboot2.domain.Anime;
-import academy.devdojo.springboot2.repository.AnimeRepository;
-import academy.devdojo.springboot2.util.Utils;
-import java.time.LocalDateTime;
+import academy.devdojo.springboot2.service.AnimeService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,34 +22,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AnimeController {
 
-    private final Utils utils;
-    private final AnimeRepository animeRepository;
+    private final AnimeService animeService;
 
     @GetMapping
     public ResponseEntity<List<Anime>> listAll() {
-        log.info("Date Formatted {}", utils.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        return ResponseEntity.ok(animeRepository.listAll());
+        return ResponseEntity.ok(animeService.listAll());
     }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Anime> findById(@PathVariable int id) {
-        return ResponseEntity.ok(animeRepository.findById(id));
+        return ResponseEntity.ok(animeService.findById(id));
     }
 
     @PostMapping
     public ResponseEntity<Anime> save(@RequestBody Anime anime) {
-        return ResponseEntity.ok(animeRepository.save(anime));
+        return ResponseEntity.ok(animeService.save(anime));
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) {
-        animeRepository.delete(id);
+        animeService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
     public ResponseEntity<Void> update(@RequestBody Anime anime) {
-        animeRepository.update(anime);
+        animeService.update(anime);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
