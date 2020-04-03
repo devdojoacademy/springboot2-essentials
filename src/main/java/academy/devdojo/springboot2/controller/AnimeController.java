@@ -3,6 +3,7 @@ package academy.devdojo.springboot2.controller;
 import academy.devdojo.springboot2.domain.Anime;
 import academy.devdojo.springboot2.service.AnimeService;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -41,7 +42,7 @@ public class AnimeController {
     }
 
     @PostMapping
-    public ResponseEntity<Anime> save(@RequestBody Anime anime) {
+    public ResponseEntity<Anime> save(@RequestBody @Valid Anime anime) {
         return ResponseEntity.ok(animeService.save(anime));
     }
 
