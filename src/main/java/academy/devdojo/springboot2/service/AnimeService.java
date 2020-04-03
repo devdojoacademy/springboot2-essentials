@@ -6,6 +6,7 @@ import academy.devdojo.springboot2.util.Utils;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
@@ -18,13 +19,16 @@ public class AnimeService {
         return animeRepository.findAll();
     }
 
-    public List<Anime> findByName(String name){return animeRepository.findByName(name);}
+    public List<Anime> findByName(String name) {
+        return animeRepository.findByName(name);
+    }
 
     public Anime findById(int id) {
         return utils.findAnimeOrThrowNotFound(id, animeRepository);
     }
 
-    public Anime save(Anime anime) {
+    @Transactional
+    public Anime save(Anime anime){
         return animeRepository.save(anime);
     }
 
