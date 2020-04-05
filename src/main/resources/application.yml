@@ -10,4 +10,17 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+#    properties:
+#      hibernate:
+#        format_sql: false
+#    show-sql: true
 
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
