@@ -6,7 +6,6 @@ import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +28,14 @@ public class AnimeController {
     private final AnimeService animeService;
 
     @GetMapping
-    public ResponseEntity<Page<Anime>> listAll(Pageable pageable) {
-        return ResponseEntity.ok(animeService.listAll(pageable));
+    public ResponseEntity<List<Anime>> listAll(Pageable pageable) {
+        return ResponseEntity.ok(animeService.listAll());
     }
+
+//    @GetMapping
+//    public ResponseEntity<Page<Anime>> listAll(Pageable pageable) {
+//        return ResponseEntity.ok(animeService.listAll(pageable));
+//    }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Anime> findById(@PathVariable int id) {
