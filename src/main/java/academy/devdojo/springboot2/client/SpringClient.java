@@ -32,10 +32,25 @@ public class SpringClient {
         Anime steinsGate = Anime.builder().name("Steins Gate").build();
 
         Anime steinsGateSaved = new RestTemplate()
-            .exchange("http://localhost:8080/animes", HttpMethod.POST, new HttpEntity<>(steinsGate,createJsonHeader()), Anime.class)
+            .exchange("http://localhost:8080/animes", HttpMethod.POST, new HttpEntity<>(steinsGate, createJsonHeader()),
+                Anime.class)
             .getBody();
 
-        log.info("Steins Gate saved id:d {} ", steinsGateSaved.getId());
+        log.info("Steins Gate saved id: {} ", steinsGateSaved.getId());
+
+        steinsGateSaved.setName("Steins Gate Zero");
+
+        ResponseEntity<Void> exchangeUpdated = new RestTemplate()
+            .exchange("http://localhost:8080/animes", HttpMethod.PUT,
+                new HttpEntity<>(steinsGateSaved, createJsonHeader()), Void.class);
+
+        log.info("Steins Gate updated status: {} ", exchangeUpdated.getStatusCode());
+
+        ResponseEntity<Void> exchangeDeleted = new RestTemplate()
+            .exchange("http://localhost:8080/animes/{id}", HttpMethod.DELETE,
+                null, Void.class, steinsGateSaved.getId());
+
+        log.info("Steins Gate deleted status: {} ", exchangeDeleted.getStatusCode());
 
     }
 
