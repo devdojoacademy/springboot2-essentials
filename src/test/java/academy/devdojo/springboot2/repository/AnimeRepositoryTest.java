@@ -1,6 +1,7 @@
 package academy.devdojo.springboot2.repository;
 
 import academy.devdojo.springboot2.domain.Anime;
+import academy.devdojo.springboot2.util.AnimeCreator;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.ConstraintViolationException;
@@ -22,7 +23,7 @@ class AnimeRepositoryTest {
     @Test
     @DisplayName("Save creates anime when successful")
     public void save_PersistAnime_WhenSuccessful() {
-        Anime anime = createAnime();
+        Anime anime = AnimeCreator.createAnimeToBeSaved();
 
         Anime savedAnime = this.animeRepository.save(anime);
         Assertions.assertThat(savedAnime.getId()).isNotNull();
@@ -34,7 +35,7 @@ class AnimeRepositoryTest {
     @Test
     @DisplayName("Save updates anime when successful")
     public void save_UpdateAnime_WhenSuccessful() {
-        Anime anime = createAnime();
+        Anime anime = AnimeCreator.createAnimeToBeSaved();
 
         Anime savedAnime = this.animeRepository.save(anime);
 
@@ -51,7 +52,7 @@ class AnimeRepositoryTest {
     @Test
     @DisplayName("Delete removes anime when successful")
     public void delete_RemoveAnime_WhenSuccessful() {
-        Anime anime = createAnime();
+        Anime anime = AnimeCreator.createAnimeToBeSaved();
 
         Anime savedAnime = this.animeRepository.save(anime);
 
@@ -66,7 +67,7 @@ class AnimeRepositoryTest {
     @Test
     @DisplayName("Find by name returns anime when successful")
     public void findByName_ReturnAnimes_WhenSuccessful() {
-        Anime anime = createAnime();
+        Anime anime = AnimeCreator.createAnimeToBeSaved();
 
         Anime savedAnime = this.animeRepository.save(anime);
 
@@ -102,10 +103,5 @@ class AnimeRepositoryTest {
             .isThrownBy(()-> animeRepository.save(anime))
             .withMessageContaining("The name of this anime cannot be empty");
     }
-
-    private Anime createAnime() {
-        return Anime.builder()
-            .name("Tensei Shitara Slime Datta Ken")
-            .build();
-    }
+    
 }
