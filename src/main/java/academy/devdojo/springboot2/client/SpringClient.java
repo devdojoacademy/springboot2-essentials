@@ -9,12 +9,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 public class SpringClient {
 
     public static void main(String[] args) {
+        System.out.println(new BCryptPasswordEncoder().encode("academy"));
 //        testGetWithRestTemplate();
 
         //@formatter:off
