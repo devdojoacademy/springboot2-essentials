@@ -1,0 +1,2 @@
+INSERT INTO anime.dev_dojo_user (id, authorities, name, password, username) VALUES (1, 'ROLE_USER,ROLE_ADMIN', 'William Suane', '{bcrypt}$2a$10$wZlTY2kGhCIlmXbi7NvI2.NjQBfyaLM8hVp4n23vJ/6fnzrxweikK', 'william');
+INSERT INTO anime.dev_dojo_user (id, authorities, name, password, username) VALUES (2, 'ROLE_USER', 'DevDojo Academy', '{bcrypt}$2a$10$wZlTY2kGhCIlmXbi7NvI2.NjQBfyaLM8hVp4n23vJ/6fnzrxweikK', 'devdojo');
