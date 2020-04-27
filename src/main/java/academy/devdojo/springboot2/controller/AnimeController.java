@@ -2,6 +2,9 @@ package academy.devdojo.springboot2.controller;
 
 import academy.devdojo.springboot2.domain.Anime;
 import academy.devdojo.springboot2.service.AnimeService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +34,9 @@ public class AnimeController {
     private final AnimeService animeService;
 
     @GetMapping
+    @Operation(summary = "List all animes paginated and sorted",
+    description = "To use pagination and sort add the params ?page='number'&sort='field' to the url",
+    tags = {"anime"})
     public ResponseEntity<Page<Anime>> listAll(Pageable pageable) {
         return ResponseEntity.ok(animeService.listAll(pageable));
     }
@@ -52,6 +58,10 @@ public class AnimeController {
     }
 
     @DeleteMapping(path = "/admin/{id}")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204",description = "Successful operation"),
+        @ApiResponse(responseCode = "404",description = "Not found")
+    })
     public ResponseEntity<Void> delete(@PathVariable int id) {
         animeService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

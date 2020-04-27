@@ -1,5 +1,6 @@
 package academy.devdojo.springboot2.domain;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,7 @@ public class Anime {
     private Integer id;
     @NotNull
     @NotEmpty(message = "The name of this anime cannot be empty")
+    @Schema(description = "Anime's name", example = "Tensei Shittara", required = true)
     private String name;
 
 
